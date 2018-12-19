@@ -30,7 +30,7 @@ int main(void)
 		display.clear();
 		shader.bind(programID);
 		mesh.draw();
-		//transform.transformation(transform);
+		transform.transformation(transform);
 
 		display.update();
 	}
