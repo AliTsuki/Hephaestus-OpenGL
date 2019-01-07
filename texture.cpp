@@ -5,9 +5,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#pragma warning(disable:4996)
 
-GLuint loadBMP_custom(const char * imagepath)
+GLuint loadBMP_custom(const char *imagepath)
 {
 	printf("Reading image : %s.\n", imagepath);
 
@@ -17,10 +16,10 @@ GLuint loadBMP_custom(const char * imagepath)
 	unsigned int imageSize;
 	unsigned int width, height;
 	// Actual RGB data
-	unsigned char * data;
+	unsigned char *data;
 
 	// Open the file
-	FILE * file = fopen(imagepath, "rb");
+	FILE *file = fopen(imagepath, "rb");
 	if (!file)
 	{
 		printf("%s could not be opened.\n", imagepath);
@@ -115,7 +114,7 @@ GLuint loadBMP_custom(const char * imagepath)
 #define FOURCC_DXT3 0x33545844 // Equivalent to "DXT3" in ASCII
 #define FOURCC_DXT5 0x35545844 // Equivalent to "DXT5" in ASCII
 
-GLuint loadDDS(const char * imagepath) {
+GLuint loadDDS(const char *imagepath) {
 
 	unsigned char header[124];
 
@@ -147,7 +146,7 @@ GLuint loadDDS(const char * imagepath) {
 	unsigned int mipMapCount =	*(unsigned int*)&(header[24]);
 	unsigned int fourCC =		*(unsigned int*)&(header[80]);
 
-	unsigned char * buffer;
+	unsigned char *buffer;
 	unsigned int bufsize;
 	/* how big is it going to be including all mipmaps? */
 	bufsize = mipMapCount > 1 ? linearSize * 2 : linearSize;
@@ -188,7 +187,7 @@ GLuint loadDDS(const char * imagepath) {
 	/* load the mipmaps */
 	for (unsigned int level = 0; level < mipMapCount && (width || height); ++level)
 	{
-		unsigned int size = ((width + 3) / 4)*((height + 3) / 4)*blockSize;
+		unsigned int size = ((width + 3) / 4) * ((height + 3) / 4) * blockSize;
 		glCompressedTexImage2D(GL_TEXTURE_2D, level, format, width, height,
 			0, size, buffer + offset);
 
